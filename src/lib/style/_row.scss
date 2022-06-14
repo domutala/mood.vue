@@ -1,0 +1,34 @@
+[class~="md:container"] {
+  width: 992px;
+  max-width: 90%;
+  margin: auto;
+}
+
+#{build-selector("row")} {
+  display: flex;
+  flex-wrap: wrap;
+
+  &#{build-selector("center")} {
+    justify-content: center;
+  }
+
+  #{build-selector("col")} {
+    width: 100%;
+
+    @for $i from 1 through $ncols {
+      &#{build-selector("col-#{$i}")} {
+        max-width: calc((100% / #{$ncols}) * #{$i});
+      }
+    }
+
+    @each $name, $size in $screen-sizes {
+      @media (max-width: #{$size}px) {
+        @for $i from 1 through $ncols {
+          &#{build-selector("col-#{$name}-#{$i}")} {
+            max-width: calc((100% / #{$ncols}) * #{$i});
+          }
+        }
+      }
+    }
+  }
+}

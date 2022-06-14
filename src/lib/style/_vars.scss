@@ -1,0 +1,30 @@
+$ncols: 6;
+
+$screen-sizes: (
+  "xs": 442,
+  "sm": 662,
+  "md": 772,
+  "lg": 992,
+);
+
+$colors: (
+  "light": #ffffff,
+  "dark": #000000,
+  "yellow": #ffd500,
+  "blue": #3688f4,
+  "green": #008000,
+  "danger": #ff1d1d,
+  "purple": purple,
+);
+
+$font-sizes: (
+  "1": 32,
+  "2": 24,
+  "3": 18.72,
+  "4": 16,
+  "5": 13.28,
+  "6": 10.78,
+);
+
+$statuts: "hover", "active", "focus", "focus-within", "focus-visible", "target",
+  "visited";

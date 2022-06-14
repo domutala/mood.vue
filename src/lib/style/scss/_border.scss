@@ -1,0 +1,45 @@
+@mixin build-radius($val, $var) {
+  .radius-#{$val},
+  .radius-top-#{$val},
+  .radius-left-#{$val} {
+    border-top-left-radius: #{$var};
+  }
+
+  .radius-#{$val},
+  .radius-bottom-#{$val},
+  .radius-left-#{$val} {
+    border-bottom-left-radius: #{$var};
+  }
+
+  .radius-#{$val},
+  .radius-top-#{$val},
+  .radius-right-#{$val} {
+    border-top-right-radius: #{$var};
+  }
+
+  .radius-#{$val},
+  .radius-bottom-#{$val},
+  .radius-right-#{$val} {
+    border-bottom-right-radius: #{$var};
+  }
+}
+
+@include build-radius("square", 0);
+@include build-radius("circle", 100%);
+@include build-radius("round", 16em);
+
+@for $i from 0 through 50 {
+  @include build-radius($i, #{$i}px);
+}
+
+@each $name, $color in $colors {
+  .bd-#{$name} {
+    border-color: $color;
+  }
+}
+
+@for $i from 0 through 10 {
+  .bd-#{$i} {
+    border-width: #{$i}px;
+  }
+}

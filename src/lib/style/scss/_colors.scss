@@ -1,0 +1,57 @@
+svg {
+  fill: currentColor;
+}
+
+@mixin color-to-root($name, $color) {
+  --md-#{$name}: #{$color};
+
+  @for $i from 1 through 9 {
+    --md-#{$name}-#{$i}#{"00"}: #{lighten($color, $i * 10)};
+  }
+}
+
+@mixin build-color($name, $selector, $status: "") {
+  .#{$selector}-#{$name}#{$status} {
+    --md-#{$selector}: var(--md-#{$name});
+  }
+
+  @for $i from 1 through 9 {
+    .#{$selector}-#{$name}-#{$i}#{"00"}#{$status} {
+      --md-#{$selector}: var(--md-#{$name}-#{$i}#{"00"});
+    }
+  }
+}
+
+:root {
+  @each $name, $color in $colors {
+    @include color-to-root($name, $color);
+  }
+}
+
+[class*="bg-"] {
+  background-color: var(--md-bg);
+}
+
+[class*="color-"] {
+  color: var(--md-color);
+}
+
+@each $statut in $statuts {
+  [class*="bg-#{$statut}-"]:#{$statut} {
+    background-color: var(--md-bg-#{$statut});
+  }
+
+  [class*="color-#{$statut}-"]:#{$statut} {
+    color: var(--md-color-#{$statut});
+  }
+}
+
+@each $name, $color in $colors {
+  @include build-color($name, "bg");
+  @include build-color($name, "color");
+
+  @each $statut in $statuts {
+    @include build-color($name, #{"bg-" + $statut}, #{":" + $statut});
+    @include build-color($name, #{"color-" + $statut}, #{":" + $statut});
+  }
+}

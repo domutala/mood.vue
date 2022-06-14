@@ -1,0 +1,66 @@
+@mixin build-shadow-color($color, $statut: false) {
+  $st: "";
+  $selector: "";
+
+  @if $statut {
+    $st: #{":" + $statut};
+    $selector: #{"-" + $statut};
+  }
+
+  .shadow#{$selector}-#{$color}#{$st} {
+    --md-shadow-color: var(--md-#{$color});
+  }
+
+  @for $i from 1 through 9 {
+    .shadow#{$selector}-#{$color}-#{$i}#{"00"}#{$st} {
+      --md-shadow-color: var(--md-#{$color}-#{$i}#{"00"});
+    }
+  }
+}
+
+@mixin build-shadow-type($value, $name, $statut: false) {
+  $st: "";
+  $selector: ".shadow";
+
+  @if $name {
+    $selector: #{$selector + "-" + $name};
+  }
+
+  @if $statut {
+    $st: #{":" + $statut};
+    $selector: #{$selector + "-" + $statut};
+  }
+
+  #{$selector}#{$st} {
+    --md-shadow-type: var(--md-shadow-color) #{$value};
+  }
+}
+
+$shadow-values: (
+  false: 0px 7px 29px 0px,
+  "none": none,
+  "sm": 0px 5px 15px 0px,
+  "xs": 0px 2px 8px 0px,
+  "lg": 0px 10px 50px,
+);
+
+[class*="shadow"] {
+  --md-shadow-color: var(--md-dark-500);
+  box-shadow: var(--md-shadow-type);
+}
+
+@each $name, $color in $colors {
+  @include build-shadow-color($name);
+
+  @each $statut in $statuts {
+    @include build-shadow-color($name, $statut);
+  }
+}
+
+@each $name, $value in $shadow-values {
+  @include build-shadow-type($value, $name);
+
+  @each $statut in $statuts {
+    @include build-shadow-type($value, $name, $statut);
+  }
+}

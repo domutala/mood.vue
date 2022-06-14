@@ -1,0 +1,5 @@
+:root {
+  @each $name, $size in $screen-sizes {
+    --md-screen-#{$name}: #{$size}px;
+  }
+}

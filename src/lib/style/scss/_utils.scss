@@ -1,0 +1,24 @@
+[class*="transition-"] {
+  transition: all ease 0.5s;
+}
+
+@mixin transition-build($select) {
+  @for $i from 0 through 100 {
+    $selector: #{".transition-" + $select};
+
+    @if $i == 0 {
+      $selector: #{$selector}#{"-"}#{$i};
+    } @else if $i > 9 {
+      $selector: #{$selector}#{"-"}#{$i};
+    } @else {
+      $selector: #{$selector}#{"-0"}#{$i};
+    }
+
+    #{$selector} {
+      #{"transition-"+ $select}: #{$i * 0.1}s;
+    }
+  }
+}
+
+@include transition-build("duration");
+@include transition-build("delay");

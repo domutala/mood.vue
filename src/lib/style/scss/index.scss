@@ -1,0 +1,19 @@
+@import "./vars";
+@import "./functions";
+@import "./fonts";
+
+@import "./colors";
+@import "./components";
+
+@import "./utils";
+@import "./text";
+@import "./shadow";
+@import "./space";
+@import "./row";
+@import "./border";
+
+.container {
+  width: 992px;
+  max-width: 90%;
+  margin: auto;
+}

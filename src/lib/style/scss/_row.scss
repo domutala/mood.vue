@@ -1,0 +1,28 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+
+  &.center {
+    justify-content: center;
+  }
+
+  .col {
+    width: 100%;
+
+    @for $i from 1 through $ncols {
+      &.col-#{$i} {
+        max-width: calc((100% / #{$ncols}) * #{$i});
+      }
+    }
+
+    @each $name, $size in $screen-sizes {
+      @media (max-width: #{$size}px) {
+        @for $i from 1 through $ncols {
+          &.col-#{$name}-#{$i} {
+            max-width: calc((100% / #{$ncols}) * #{$i});
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@each $name, $size in $font-sizes {
+  h#{$name},
+  .text-#{$name} {
+    font-size: #{$size}px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}

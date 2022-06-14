@@ -1,0 +1,41 @@
+@use "sass:string";
+$spaces: (
+  "m": "margin",
+  "p": "padding",
+);
+
+@mixin build-space($val, $var) {
+  @each $name, $space in $spaces {
+    #{build-selector(#{$name}-#{$val})},
+    #{build-selector(#{$name}x-#{$val})},
+    #{build-selector(#{$name}l-#{$val})} {
+      #{$space}-left: #{$var};
+    }
+
+    #{build-selector(#{$name}-#{$val})},
+    #{build-selector(#{$name}x-#{$val})},
+    #{build-selector(#{$name}r-#{$val})} {
+      #{$space}-right: #{$var};
+    }
+
+    #{build-selector(#{$name}-#{$val})},
+    #{build-selector(#{$name}y-#{$val})},
+    #{build-selector(#{$name}t-#{$val})} {
+      #{$space}-top: #{$var};
+    }
+
+    #{build-selector(#{$name}-#{$val})},
+    #{build-selector(#{$name}y-#{$val})},
+    #{build-selector(#{$name}b-#{$val})} {
+      #{$space}-bottom: #{$var};
+    }
+  }
+}
+
+@each $name, $space in $spaces {
+  @for $i from 0 through 50 {
+    @include build-space($i, #{$i}px);
+  }
+
+  @include build-space("auto", "auto");
+}
